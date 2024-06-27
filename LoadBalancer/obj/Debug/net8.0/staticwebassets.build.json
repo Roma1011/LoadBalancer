@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "vzOrt79mzWHRNa3D5aDD29D4KAhhOkIEK0yZSdQm7qg=",
+  "Source": "LoadBalancer",
+  "BasePath": "_content/LoadBalancer",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
