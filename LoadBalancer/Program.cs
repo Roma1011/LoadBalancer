@@ -1,10 +1,11 @@
 using LoadBalancer.Balancer;
-using LoadBalancer.Balancer.Extension;
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<Balancer>();
+
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
@@ -13,6 +14,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseRouting();
 app.UseHttpsRedirection();
-BalancerBuilderExtension.UseLoadBalancing(app);
+app.UseMiddleware<Core>(); // Add middleware
 app.Run();

@@ -1,4 +1,4 @@
-﻿namespace LoadBalancer.Balancer.Extension;
+﻿/*namespace LoadBalancer.Balancer.Extension;
 
 public static class BalancerBuilderExtension
 {
@@ -7,4 +7,4 @@ public static class BalancerBuilderExtension
         builder.UseMiddleware<Balancer>();
         return builder;
     }
-}
+}*/
