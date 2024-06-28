@@ -1,18 +1,24 @@
 ﻿using System.Text;
+using LoadBalancer.Models;
 
 namespace LoadBalancer.Balancer;
 
-public sealed class Core(IHttpClientFactory httpClientFactory, RequestDelegate next)
+internal sealed class Core(BalancerContext balancercontext,AlgorithmType algorithmType,IHttpClientFactory httpClientFactory,RequestDelegate next)
 {
     public async Task<HttpResponseMessage> Invoke(HttpContext context)
     {
+        string uri= await balancercontext.BalanceIt(algorithmType);
         HttpClient httpClient = httpClientFactory.CreateClient();
+        var a = algorithmType;
         var response=await httpClient.SendAsync(new HttpRequestMessage(new HttpMethod(context.Request.Method.ToUpper()), 
-            new Uri( new Uri("http://localhost:5165"),context.Request.Path.Value))
+            new Uri( new Uri(uri),context.Request.Path.Value))
         {
             Content = new StringContent(await GetContentValueAsync(context.Request), Encoding.UTF8,await GetContentType(context.Request))
         });
         await context.Response.WriteAsync(await response.Content.ReadAsStringAsync());
+        
+        balancercontext.SaveHistory(new RequestHistory(uri,DateTime.Now));
+        
         return response;
     }
 

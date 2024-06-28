@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LoadBalancer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+16f02a08c47c8110c0c876b059a4082e1987262f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1a2f144a6534417276f9dba83008cd0a35010988")]
 [assembly: System.Reflection.AssemblyProductAttribute("LoadBalancer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LoadBalancer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
