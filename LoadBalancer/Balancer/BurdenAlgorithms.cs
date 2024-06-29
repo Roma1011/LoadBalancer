@@ -4,7 +4,7 @@ namespace LoadBalancer.Balancer;
 
 public class BurdenAlgorithms
 {
-    private static int index = 0;
+    private static int _index = 0;
     public static Task<string> CallIt(List<RequestHistory> history,ServerStatus[] serverInfo, AlgorithmType type)
     {
         switch (type)
@@ -13,15 +13,15 @@ public class BurdenAlgorithms
             {
                 string uri=string.Empty;
                 
-                while (index<serverInfo.Length)
+                while (_index<serverInfo.Length)
                 {
-                    uri=serverInfo[index].Uri;
-                    index++;
+                    uri=serverInfo[_index].Uri;
+                    _index++;
                     break;
                 }
 
-                if (index == serverInfo.Length)
-                    index = 0;
+                if (_index == serverInfo.Length)
+                    _index = 0;
                 
                 return Task.FromResult(uri);
             }
@@ -36,7 +36,7 @@ public class BurdenAlgorithms
                 return Task.FromResult(result);
             }
             default:
-                return Task.FromResult("");
+                return Task.FromResult(serverInfo[Random.Shared.Next(0, serverInfo.Length)].Uri);
         }
     }
 }
