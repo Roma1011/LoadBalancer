@@ -460,19 +460,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Student\\.nuget\\packages\\": {}
+    "C:\\Users\\romsk\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Programing\\c# .NET\\LoadBalancerMyWay\\Loadbalancer\\LoadBalancer.csproj",
+      "projectUniqueName": "C:\\Dot.net\\LoadBalancer\\Loadbalancer\\LoadBalancer.csproj",
       "projectName": "LoadBalancer",
-      "projectPath": "F:\\Programing\\c# .NET\\LoadBalancerMyWay\\Loadbalancer\\LoadBalancer.csproj",
-      "packagesPath": "C:\\Users\\Student\\.nuget\\packages\\",
-      "outputPath": "F:\\Programing\\c# .NET\\LoadBalancerMyWay\\Loadbalancer\\obj\\",
+      "projectPath": "C:\\Dot.net\\LoadBalancer\\Loadbalancer\\LoadBalancer.csproj",
+      "packagesPath": "C:\\Users\\romsk\\.nuget\\packages\\",
+      "outputPath": "C:\\Dot.net\\LoadBalancer\\Loadbalancer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Student\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\romsk\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -480,6 +480,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -526,7 +527,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

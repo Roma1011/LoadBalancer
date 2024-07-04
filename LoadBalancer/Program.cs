@@ -19,5 +19,5 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting();
 app.UseHttpsRedirection();
-BalancerBuilderExtension.UseLoadBalancing(app,AlgorithmType.Equally);
+BalancerBuilderExtension.UseLoadBalancing(app,AlgorithmType.EmphasisOnTheSecond);
 app.Run();

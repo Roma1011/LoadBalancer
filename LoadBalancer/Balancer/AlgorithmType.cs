@@ -7,11 +7,11 @@ public enum AlgorithmType
     /// </summary>
     Equally=0,
     /// <summary>
-    /// Most of the load distribution to the first receiver
+    /// Most of the load distribution to the first group receiver
     /// </summary>
     EmphasisOnTheFirst =1,
     /// <summary>
-    /// Most of the load distribution to the second receiver
+    /// Most of the load distribution to the second group receiver
     /// </summary>
     EmphasisOnTheSecond =2,
     /// <summary>

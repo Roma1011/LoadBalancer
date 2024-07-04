@@ -27,13 +27,19 @@ public class BurdenAlgorithms
             }
             case AlgorithmType.EmphasisOnTheFirst:
             {
-                string result = "Details for Emphasis on the First";
-                return Task.FromResult(result);
+                if (_index > serverInfo.Length / 2)
+                    _index = 0;
+                
+                _index++;
+                return Task.FromResult(serverInfo[Random.Shared.Next(0,serverInfo.Length / 2)].Uri);
             }
             case AlgorithmType.EmphasisOnTheSecond:
             {
-                string result = "Details for Emphasis on the Second";
-                return Task.FromResult(result);
+                if (_index > serverInfo.Length)
+                    _index = serverInfo.Length / 2;
+                
+                _index++;
+                return Task.FromResult(serverInfo[Random.Shared.Next(serverInfo.Length/2,serverInfo.Length)].Uri);
             }
             default:
                 return Task.FromResult(serverInfo[Random.Shared.Next(0, serverInfo.Length)].Uri);
