@@ -18,7 +18,7 @@ public class BalancerContext
 
     public async Task<string> BalanceIt(AlgorithmType algType)
     {
-        return await BurdenAlgorithms.CallIt(_requestHistory,_serverInfo, algType);
+        return await BurdenAlgorithms.CallIt(_serverInfo, algType);
     }
     
     public void SaveHistory(RequestHistory history)

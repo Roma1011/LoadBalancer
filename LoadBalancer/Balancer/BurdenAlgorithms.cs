@@ -5,7 +5,7 @@ namespace LoadBalancer.Balancer;
 public class BurdenAlgorithms
 {
     private static int _index = 0;
-    public static Task<string> CallIt(List<RequestHistory> history,ServerStatus[] serverInfo, AlgorithmType type)
+    public static Task<string> CallIt(ServerStatus[] serverInfo, AlgorithmType type)
     {
         switch (type)
         {

@@ -1,16 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Q/xKq975RUFoX/20CA/JpJHq349NDmxXgOFqynGu+7mh7RaynPPsruCIjR7aGr3z8tke5lEGOhY3xcGEXZjOKA==",
+  "dgSpecHash": "AFYivI6y1Fsnd55R8a9eSNX9DlADrREYa1b/b86XROZdJDXqE0QueSRNmF4AtuMvqqr80ansx3oxffzDXNfi7g==",
   "success": true,
   "projectFilePath": "C:\\Dot.net\\LoadBalancer\\Loadbalancer\\LoadBalancer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\romsk\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.0\\microsoft.aspnetcore.openapi.8.0.0.nupkg.sha512",
-    "C:\\Users\\romsk\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
-    "C:\\Users\\romsk\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
-    "C:\\Users\\romsk\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
-    "C:\\Users\\romsk\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
-    "C:\\Users\\romsk\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
-    "C:\\Users\\romsk\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+    "C:\\Users\\romsk\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512"
   ],
   "logs": []
 }
