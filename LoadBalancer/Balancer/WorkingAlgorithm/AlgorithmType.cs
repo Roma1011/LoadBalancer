@@ -1,4 +1,4 @@
-﻿namespace LoadBalancer.Balancer;
+﻿namespace LoadBalancer.Balancer.WorkingAlgorithm;
 
 public enum AlgorithmType
 {

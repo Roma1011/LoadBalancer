@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LoadBalancer.Balancer.WorkingAlgorithm;
 using LoadBalancer.Models;
 using Microsoft.Extensions.Options;
 
-namespace LoadBalancer.Balancer;
+namespace LoadBalancer.Balancer.Domain;
 
 public class BalancerContext
 {
@@ -15,7 +16,7 @@ public class BalancerContext
         Array.Resize(ref _serverInfo,servOptions.Value.Receivers.Length);
         for (int i = 0; i < servOptions.Value.Receivers.Length; i++)
         {
-            _serverInfo.SetValue(new ServerStatus(){ Uri = servOptions.Value.Receivers[i], IsActive = false },i);
+            _serverInfo.SetValue(new ServerStatus{ Uri = servOptions.Value.Receivers[i], IsActive = false },i);
         }
     }
 

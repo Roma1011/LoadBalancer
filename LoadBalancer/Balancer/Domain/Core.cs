@@ -3,10 +3,11 @@ using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using LoadBalancer.Balancer.WorkingAlgorithm;
 using LoadBalancer.Models;
 using Microsoft.AspNetCore.Http;
 
-namespace LoadBalancer.Balancer;
+namespace LoadBalancer.Balancer.Domain;
 
 internal sealed class Core(BalancerContext balancercontext,AlgorithmType algorithmType,IHttpClientFactory httpClientFactory,RequestDelegate next)
 {

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using LoadBalancer.Models;
 
-namespace LoadBalancer.Balancer;
+namespace LoadBalancer.Balancer.WorkingAlgorithm;
 
 public class BurdenAlgorithms
 {
@@ -27,6 +27,7 @@ public class BurdenAlgorithms
                 
                 return Task.FromResult(uri);
             }
+            //------------------------------------------------------------------------------------------------------------            
             case AlgorithmType.EmphasisOnTheFirst:
             {
                 if (_index > serverInfo.Length / 2)
@@ -35,6 +36,7 @@ public class BurdenAlgorithms
                 _index++;
                 return Task.FromResult(serverInfo[Random.Shared.Next(0,serverInfo.Length / 2)].Uri);
             }
+            //------------------------------------------------------------------------------------------------------------             
             case AlgorithmType.EmphasisOnTheSecond:
             {
                 if (_index > serverInfo.Length)
@@ -43,6 +45,7 @@ public class BurdenAlgorithms
                 _index++;
                 return Task.FromResult(serverInfo[Random.Shared.Next(serverInfo.Length/2,serverInfo.Length)].Uri);
             }
+            //------------------------------------------------------------------------------------------------------------             
             default:
                 return Task.FromResult(serverInfo[Random.Shared.Next(0, serverInfo.Length)].Uri);
         }

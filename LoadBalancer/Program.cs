@@ -1,5 +1,7 @@
 using LoadBalancer.Balancer;
+using LoadBalancer.Balancer.Domain;
 using LoadBalancer.Balancer.Extension;
+using LoadBalancer.Balancer.WorkingAlgorithm;
 using LoadBalancer.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
