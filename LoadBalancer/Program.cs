@@ -1,6 +1,8 @@
 using LoadBalancer.Balancer;
 using LoadBalancer.Balancer.Extension;
 using LoadBalancer.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 
 
 var builder = WebApplication.CreateBuilder(args);

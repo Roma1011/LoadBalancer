@@ -1,3 +1,5 @@
-﻿namespace LoadBalancer.Models;
+﻿using System;
+
+namespace LoadBalancer.Models;
 
 public record RequestHistory(string Uri, DateTime SendDate);

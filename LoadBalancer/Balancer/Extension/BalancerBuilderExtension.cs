@@ -1,4 +1,6 @@
-﻿namespace LoadBalancer.Balancer.Extension;
+﻿using Microsoft.AspNetCore.Builder;
+
+namespace LoadBalancer.Balancer.Extension;
 
 public static class BalancerBuilderExtension
 {
