@@ -26,7 +26,7 @@ public class BurdenAlgorithms
                     _index = 0;
                 
                 return Task.FromResult(uri);
-            }
+            } break;
             //------------------------------------------------------------------------------------------------------------            
             case AlgorithmType.EmphasisOnTheFirst:
             {
@@ -35,7 +35,7 @@ public class BurdenAlgorithms
                 
                 _index++;
                 return Task.FromResult(serverInfo[Random.Shared.Next(0,serverInfo.Length / 2)].Uri);
-            }
+            } break;
             //------------------------------------------------------------------------------------------------------------             
             case AlgorithmType.EmphasisOnTheSecond:
             {
@@ -44,7 +44,7 @@ public class BurdenAlgorithms
                 
                 _index++;
                 return Task.FromResult(serverInfo[Random.Shared.Next(serverInfo.Length/2,serverInfo.Length)].Uri);
-            }
+            } break;
             //------------------------------------------------------------------------------------------------------------             
             default:
                 return Task.FromResult(serverInfo[Random.Shared.Next(0, serverInfo.Length)].Uri);
