@@ -15,4 +15,5 @@ var app = builder.Build();
 app.UseRouting();
 app.UseHttpsRedirection();
 BalancerBuilderExtension.UseLoadBalancing(app,AlgorithmType.EmphasisOnTheFirst);
+
 app.Run();
