@@ -15,15 +15,15 @@ internal sealed class Core(BalancerContext balancercontext,AlgorithmType algorit
         
         HttpClient httpClient = httpClientFactory.CreateClient();
         HttpResponseMessage message=new HttpResponseMessage();
+        
         var responseHealth=await httpClient.SendAsync(new HttpRequestMessage(new HttpMethod(context.Request.Method.ToUpper()), 
-            new Uri( new Uri(uri),"/HealthCheck/HealthCheck"))
+            new Uri(new Uri(uri),"/HealthCheck/HealthCheck"))
         {
             Content = new StringContent(await GetContentValueAsync(context.Request), Encoding.UTF8,await GetContentType(context.Request))
         });
-
+        
         if (responseHealth.StatusCode == HttpStatusCode.OK)
         {
-            var a = algorithmType;
             message=await httpClient.SendAsync(new HttpRequestMessage(new HttpMethod(context.Request.Method.ToUpper()), 
                 new Uri( new Uri(uri),context.Request.Path.Value))
             {

@@ -1,6 +1,5 @@
 ﻿using LoadBalancer.Balancer.Domain;
 using LoadBalancer.Balancer.WorkingAlgorithm;
-using Microsoft.AspNetCore.Builder;
 
 namespace LoadBalancer.Balancer.Extension;
 
