@@ -14,7 +14,6 @@ internal sealed class Core(BalancerContext balancercontext,AlgorithmType algorit
             return new HttpResponseMessage(HttpStatusCode.InternalServerError);
         
         HttpClient httpClient = httpClientFactory.CreateClient();
-        HttpResponseMessage message=new HttpResponseMessage();
         
         var responseHealth=await httpClient.SendAsync(new HttpRequestMessage(new HttpMethod(context.Request.Method.ToUpper()), 
             new Uri(new Uri(uri),"/HealthCheck/HealthCheck"))
@@ -24,12 +23,12 @@ internal sealed class Core(BalancerContext balancercontext,AlgorithmType algorit
         
         if (responseHealth.StatusCode == HttpStatusCode.OK)
         {
-            message=await httpClient.SendAsync(new HttpRequestMessage(new HttpMethod(context.Request.Method.ToUpper()), 
+            var responseMessage=await httpClient.SendAsync(new HttpRequestMessage(new HttpMethod(context.Request.Method.ToUpper()), 
                 new Uri( new Uri(uri),context.Request.Path.Value))
             {
                 Content = new StringContent(await GetContentValueAsync(context.Request), Encoding.UTF8,await GetContentType(context.Request))
             });
-            await context.Response.WriteAsync(await message.Content.ReadAsStringAsync());
+            await context.Response.WriteAsync(await responseMessage.Content.ReadAsStringAsync());
         
             balancercontext.SaveHistory(new RequestHistory(uri,DateTime.Now));
         }
@@ -37,7 +36,7 @@ internal sealed class Core(BalancerContext balancercontext,AlgorithmType algorit
         {
             balancercontext.StatusInactive(uri);
         }
-        return message;
+        return new HttpResponseMessage(HttpStatusCode.BadGateway);
     }
 
     private static async Task<string> GetContentValueAsync(HttpRequest request)
