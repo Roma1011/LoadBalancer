@@ -1,10 +1,7 @@
-using LoadBalancer.Balancer;
 using LoadBalancer.Balancer.Domain;
 using LoadBalancer.Balancer.Extension;
 using LoadBalancer.Balancer.WorkingAlgorithm;
-using LoadBalancer.Models;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
+using LoadBalancer.Models;;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,5 +14,5 @@ var app = builder.Build();
 
 app.UseRouting();
 app.UseHttpsRedirection();
-BalancerBuilderExtension.UseLoadBalancing(app,AlgorithmType.EmphasisOnTheSecond);
+BalancerBuilderExtension.UseLoadBalancing(app,AlgorithmType.EmphasisOnTheFirst);
 app.Run();

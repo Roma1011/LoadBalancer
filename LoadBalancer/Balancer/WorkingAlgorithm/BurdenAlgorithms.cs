@@ -17,7 +17,12 @@ public class BurdenAlgorithms
                 
                 while (_index<serverInfo.Length)
                 {
+                    if (serverInfo[_index].IsActive == false)
+                        goto CONTINUE;
+                    
                     uri=serverInfo[_index].Uri;
+                    
+                    CONTINUE:
                     _index++;
                     break;
                 }
@@ -33,7 +38,11 @@ public class BurdenAlgorithms
                 if (_index > serverInfo.Length / 2)
                     _index = 0;
                 
+                if(serverInfo[_index].IsActive==false)
+                    break;
+                
                 _index++;
+                
                 return Task.FromResult(serverInfo[Random.Shared.Next(0,serverInfo.Length / 2)].Uri);
             } break;
             //------------------------------------------------------------------------------------------------------------             
@@ -42,6 +51,9 @@ public class BurdenAlgorithms
                 if (_index > serverInfo.Length)
                     _index = serverInfo.Length / 2;
                 
+                if(serverInfo[_index].IsActive==false)
+                    break;
+                
                 _index++;
                 return Task.FromResult(serverInfo[Random.Shared.Next(serverInfo.Length/2,serverInfo.Length)].Uri);
             } break;
@@ -49,5 +61,7 @@ public class BurdenAlgorithms
             default:
                 return Task.FromResult(serverInfo[Random.Shared.Next(0, serverInfo.Length)].Uri);
         }
+
+        return Task.FromResult(string.Empty);
     }
 }

@@ -1,11 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Net.Http;
+﻿using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using LoadBalancer.Balancer.WorkingAlgorithm;
 using LoadBalancer.Models;
-using Microsoft.AspNetCore.Http;
 
 namespace LoadBalancer.Balancer.Domain;
 
@@ -14,18 +10,34 @@ internal sealed class Core(BalancerContext balancercontext,AlgorithmType algorit
     public async Task<HttpResponseMessage> Invoke(HttpContext context)
     {
         string uri= await balancercontext.BalanceIt(algorithmType);
+        if (uri == string.Empty)
+            return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+        
         HttpClient httpClient = httpClientFactory.CreateClient();
-        var a = algorithmType;
-        var response=await httpClient.SendAsync(new HttpRequestMessage(new HttpMethod(context.Request.Method.ToUpper()), 
-            new Uri( new Uri(uri),context.Request.Path.Value))
+        HttpResponseMessage message=new HttpResponseMessage();
+        var responseHealth=await httpClient.SendAsync(new HttpRequestMessage(new HttpMethod(context.Request.Method.ToUpper()), 
+            new Uri( new Uri(uri),"/HealthCheck/HealthCheck"))
         {
             Content = new StringContent(await GetContentValueAsync(context.Request), Encoding.UTF8,await GetContentType(context.Request))
         });
-        await context.Response.WriteAsync(await response.Content.ReadAsStringAsync());
+
+        if (responseHealth.StatusCode == HttpStatusCode.OK)
+        {
+            var a = algorithmType;
+            message=await httpClient.SendAsync(new HttpRequestMessage(new HttpMethod(context.Request.Method.ToUpper()), 
+                new Uri( new Uri(uri),context.Request.Path.Value))
+            {
+                Content = new StringContent(await GetContentValueAsync(context.Request), Encoding.UTF8,await GetContentType(context.Request))
+            });
+            await context.Response.WriteAsync(await message.Content.ReadAsStringAsync());
         
-        balancercontext.SaveHistory(new RequestHistory(uri,DateTime.Now));
-        
-        return response;
+            balancercontext.SaveHistory(new RequestHistory(uri,DateTime.Now));
+        }
+        else
+        {
+            balancercontext.StatusInactive(uri);
+        }
+        return message;
     }
 
     private static async Task<string> GetContentValueAsync(HttpRequest request)
