@@ -7,6 +7,7 @@ namespace LoadBalancer.Balancer.Domain;
 
 internal sealed class Core(BalancerContext balancercontext,AlgorithmType algorithmType,IHttpClientFactory httpClientFactory,RequestDelegate next)
 {
+    private const string HealthUrl = "/HealthCheck/HealthCheck";
     public async Task<HttpResponseMessage> Invoke(HttpContext context)
     {
         string uri= await balancercontext.BalanceIt(algorithmType);
@@ -16,7 +17,7 @@ internal sealed class Core(BalancerContext balancercontext,AlgorithmType algorit
         HttpClient httpClient = httpClientFactory.CreateClient();
         
         var responseHealth=await httpClient.SendAsync(new HttpRequestMessage(new HttpMethod(context.Request.Method.ToUpper()), 
-            new Uri(new Uri(uri),"/HealthCheck/HealthCheck"))
+            new Uri(new Uri(uri),HealthUrl))
         {
             Content = new StringContent(await GetContentValueAsync(context.Request), Encoding.UTF8,await GetContentType(context.Request))
         });
