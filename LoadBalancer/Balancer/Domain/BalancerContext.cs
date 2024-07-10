@@ -30,13 +30,13 @@ public class BalancerContext
         _requestHistory.Add(history);
     }
 
-    public void StatusInactive(string url)
+    public void SetStatus(string url,bool status)
     {
         for (int i = 0; i < _serverInfo.Length; i++)
         {
             if (_serverInfo[i].Uri == url)
             {
-                _serverInfo[i].IsActive = false;
+                _serverInfo[i].IsActive = status;
                 break;
             }
         }

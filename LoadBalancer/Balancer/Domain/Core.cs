@@ -7,37 +7,24 @@ namespace LoadBalancer.Balancer.Domain;
 
 internal sealed class Core(BalancerContext balancercontext,AlgorithmType algorithmType,IHttpClientFactory httpClientFactory,RequestDelegate next)
 {
-    private const string HealthUrl = "/HealthCheck/HealthCheck";
     public async Task<HttpResponseMessage> Invoke(HttpContext context)
     {
         string uri= await balancercontext.BalanceIt(algorithmType);
         if (uri == string.Empty)
-            return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            return new HttpResponseMessage(HttpStatusCode.BadGateway);
         
         HttpClient httpClient = httpClientFactory.CreateClient();
         
-        var responseHealth=await httpClient.SendAsync(new HttpRequestMessage(new HttpMethod(context.Request.Method.ToUpper()), 
-            new Uri(new Uri(uri),HealthUrl))
+        var responseMessage=await httpClient.SendAsync(new HttpRequestMessage(new HttpMethod(context.Request.Method.ToUpper()), 
+            new Uri( new Uri(uri),context.Request.Path.Value))
         {
             Content = new StringContent(await GetContentValueAsync(context.Request), Encoding.UTF8,await GetContentType(context.Request))
         });
+        await context.Response.WriteAsync(await responseMessage.Content.ReadAsStringAsync());
+    
+        balancercontext.SaveHistory(new RequestHistory(uri,DateTime.Now));
         
-        if (responseHealth.StatusCode == HttpStatusCode.OK)
-        {
-            var responseMessage=await httpClient.SendAsync(new HttpRequestMessage(new HttpMethod(context.Request.Method.ToUpper()), 
-                new Uri( new Uri(uri),context.Request.Path.Value))
-            {
-                Content = new StringContent(await GetContentValueAsync(context.Request), Encoding.UTF8,await GetContentType(context.Request))
-            });
-            await context.Response.WriteAsync(await responseMessage.Content.ReadAsStringAsync());
-        
-            balancercontext.SaveHistory(new RequestHistory(uri,DateTime.Now));
-        }
-        else
-        {
-            balancercontext.StatusInactive(uri);
-        }
-        return new HttpResponseMessage(HttpStatusCode.BadGateway);
+        return responseMessage;
     }
 
     private static async Task<string> GetContentValueAsync(HttpRequest request)

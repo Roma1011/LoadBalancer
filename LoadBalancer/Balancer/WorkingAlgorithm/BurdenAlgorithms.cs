@@ -12,13 +12,12 @@ public class BurdenAlgorithms
             case AlgorithmType.Equally:
             {
                 string uri=string.Empty;
+
+                if (!serverInfo[_index].IsActive)
+                   return Task.FromResult(uri);
                 
-                while (_index<serverInfo.Length)
-                {
-                    uri=serverInfo[_index].Uri;
-                    _index++;
-                    break;
-                }
+                uri=serverInfo[_index].Uri;
+                _index++;
 
                 if (_index == serverInfo.Length)
                     _index = 0;
