@@ -7,11 +7,22 @@ namespace LoadBalancer.Balancer.Domain;
 
 internal sealed class Core(BalancerContext balancercontext,AlgorithmType algorithmType,IHttpClientFactory httpClientFactory,RequestDelegate next)
 {
-    public async Task<HttpResponseMessage> Invoke(HttpContext context)
+    public static int x = 1;
+    public static int i = 0;
+    public async Task Invoke(HttpContext context)
     {
         string uri= await balancercontext.BalanceIt(algorithmType);
         if (uri == string.Empty)
-            return new HttpResponseMessage(HttpStatusCode.BadGateway);
+        {
+            if (i > x)
+            {
+                context.Response.StatusCode = StatusCodes.Status502BadGateway;
+                return;
+            }
+
+            i++;
+            await this.Invoke(context);
+        }
         
         HttpClient httpClient = httpClientFactory.CreateClient();
         
@@ -24,7 +35,7 @@ internal sealed class Core(BalancerContext balancercontext,AlgorithmType algorit
     
         balancercontext.SaveHistory(new RequestHistory(uri,DateTime.Now));
         
-        return responseMessage;
+        return ;
     }
 
     private static async Task<string> GetContentValueAsync(HttpRequest request)

@@ -10,6 +10,7 @@ builder.Services.Configure<ServerOptions>(builder.Configuration.GetSection(nameo
 builder.Services.AddSingleton<BalancerContext>();
 builder.Services.AddSingleton<IWorker, HealthCheck>();
 builder.Services.AddHostedService<WorkerManager>();
+builder.Services.AddHealthChecks();
 builder.Services.AddHttpClient();
 
 var app = builder.Build();

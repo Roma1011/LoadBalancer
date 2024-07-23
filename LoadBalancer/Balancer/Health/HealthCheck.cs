@@ -13,9 +13,6 @@ public class HealthCheck([FromServices]BalancerContext balancerContext,IOptions<
     
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        /*using var scope = serviceProvider.CreateScope();
-        var loadBalancerManager = scope.ServiceProvider.GetRequiredService<BalancerContext>();*/
-        
         foreach (var url in _server.Receivers)
         {
             var httpClient = httpClientFactory.CreateClient();
